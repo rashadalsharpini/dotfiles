@@ -33,20 +33,26 @@ set $mod Mod4
 
 # current displays
 set $firstMonitor eDP-1
-set $secondMonitor HDMI-2
-exec --no-startup-id xrandr --output $firstMonitor --right-of $secondMonitor --auto
+set $secondMonitor HDMI-1-0
+exec_always --no-startup-id xrandr --output $firstMonitor --mode 1920x1200 --primary --rotate normal --output $secondMonitor --mode 1920x1080 --rotate left --left-of $firstMonitor
+exec_always --no-startup-id xinput set-prop "ASUF1204:00 2808:0202 Touchpad" "libinput Tapping Enabled" 1
 # my stuff
 exec --no-startup-id ~/.local/bin/getReady.sh &
 bindsym $mod+ctrl+l exec --no-startup-id betterlockscreen -l 
 bindsym $mod+ctrl+shift+l exec --no-startup-id betterlockscreen -l & systemctl suspend 
 bindsym Shift+ctrl+n exec notify-send "اتقي الله"
-bindsym Print exec --no-startup-id gnome-screenshot -i
+bindsym Print exec --no-startup-id flameshot gui
 bindsym Shift+Print exec --no-startup-id ~/.local/bin/ocr
 bindsym $mod+Tab exec --no-startup-id "rofi -show window -theme ~/.config/rofi/launchers/type-6/style-8.rasi"
 exec --no-startup-id cliphist daemon
 bindsym $mod+v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -theme ~/.config/rofi/launchers/type-1/style-2.rasi 
 for_window [class="Gnome-pomodoro"] floating enable
 for_window [class="amberol"] floating enable
+# Volume Up: Mod + Scroll Up
+bindsym $mod+button4 exec --no-startup-id amixer sset Master 5%+
+
+# Volume Down: Mod + Scroll Down
+bindsym $mod+button5 exec --no-startup-id amixer sset Master 5%-
 
 # Power profile shortcuts
 bindsym $mod+F10 exec --no-startup-id powerprofilesctl set power-saver
@@ -55,16 +61,16 @@ bindsym $mod+F12 exec --no-startup-id powerprofilesctl set performance
 
 
 
-workspace 1 output $firstMonitor
-workspace 2 output $firstMonitor
-workspace 3 output $secondMonitor
-workspace 4 output $secondMonitor
-workspace 5 output $secondMonitor
-workspace 6 output $secondMonitor
-workspace 7 output $secondMonitor
-workspace 8 output $secondMonitor
-workspace 9 output $secondMonitor
-workspace 10 output $secondMonitor
+workspace 1 output $secondMonitor
+workspace 2 output $secondMonitor
+workspace 3 output $firstMonitor
+workspace 4 output $firstMonitor
+workspace 5 output $firstMonitor
+workspace 6 output $firstMonitor
+workspace 7 output $firstMonitor
+workspace 8 output $firstMonitor
+workspace 9 output $firstMonitor
+workspace 10 output $firstMonitor
 
 
 
@@ -521,8 +527,8 @@ bindsym mod1+Shift+u exec --no-startup-id wal -i $(cat $HOME/.config/variety/wal
   bindsym XF86AudioStop exec --no-startup-id playerctl stop
 ################# xbacklight                       
 
-  bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20 # increase screen brightness
-  bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
+  bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5% # increase screen brightness
+  bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%- # decrease screen brightness
 
 ################# bar toggle                       
 

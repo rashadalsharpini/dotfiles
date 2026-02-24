@@ -32,8 +32,9 @@ set $mod Mod4
 
 
 # current displays
-set $firstMonitor eDP-1
+set $firstMonitor eDP-2
 set $secondMonitor HDMI-1-0
+
 exec_always --no-startup-id xrandr --output $firstMonitor --mode 1920x1200 --primary --rotate normal --output $secondMonitor --mode 1920x1080 --rotate left --left-of $firstMonitor
 exec_always --no-startup-id xinput set-prop "ASUF1204:00 2808:0202 Touchpad" "libinput Tapping Enabled" 1
 # my stuff
@@ -42,8 +43,9 @@ bindsym $mod+ctrl+l exec --no-startup-id betterlockscreen -l
 bindsym $mod+ctrl+shift+l exec --no-startup-id betterlockscreen -l & systemctl suspend 
 bindsym Shift+ctrl+n exec notify-send "اتقي الله"
 bindsym Print exec --no-startup-id flameshot gui
-bindsym Shift+Print exec --no-startup-id ~/.local/bin/ocr
-bindsym $mod+Tab exec --no-startup-id "rofi -show window -theme ~/.config/rofi/launchers/type-6/style-8.rasi"
+bindsym Shift+Print exec --no-startup-id ~/.local/bin/ocrToClip.sh
+# bindsym Shift+Print exec --no-startup-id ~/.local/bin/ocr
+bindsym $mod+Tab exec --no-startup-id "rofi -show window -theme ~/.config/rofi/launchers/type-3/style-1.rasi"
 exec --no-startup-id cliphist daemon
 bindsym $mod+v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -theme ~/.config/rofi/launchers/type-1/style-2.rasi 
 for_window [class="Gnome-pomodoro"] floating enable
